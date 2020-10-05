@@ -16,8 +16,8 @@ function deleteToDo(event){
 	const li = btn.parentNode;
 	toDoList.removeChild(li);
 	const cleanToDos = toDos.filter(function(toDo){
-		return toDo.id != parseInt(li.id);
-	}); // 해당 id 삭제
+		return toDo.id != parseInt(li.id); //삭제된것들이 return 되는데 그걸 filter 하니까 삭제안한것만 남음
+	}); // 해당 id 삭제가 로컬 스토리지에서 삭제되게
 	toDos = cleanToDos;
 	saveToDos();
 }
@@ -31,10 +31,13 @@ function paintToDo(text){
 	const delBtn = document.createElement("button");
 	const span = document.createElement("span");
 	const newId = toDos.length + 1;
+
 	delBtn.innerText = "❌";
 	delBtn.className = "toDo_btn";
 	delBtn.addEventListener("click", deleteToDo);
+
 	span.innerText = text;
+
 	li.appendChild(delBtn);
 	li.appendChild(span);
 	li.id = newId;
